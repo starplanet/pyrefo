@@ -7,6 +7,7 @@ class Pattern(object):
         self._n = 0  # group计数
         self._state = OrderedDict()  # 记录group key与submatch save inst关系
         self._state_i = {} # 记录group key与submatch index关系
+        self.arg = None
 
     def _compile(self, cont):
         raise NotImplementedError

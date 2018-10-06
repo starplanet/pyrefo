@@ -3,10 +3,14 @@ from pyrefo.patterns import *
 
 
 @ffi.def_extern()
-def comp_func_callback(o, y):
+def comp_func_callback(o, y, ylen):
     o = ffi.from_handle(o)
-    y = ffi.from_handle(y)
-    return o.comparison_function(y)
+    if ylen == 1:
+        y = ffi.from_handle(y[0])
+    else:
+        y = [ffi.from_handle(y[i]) for i in range(ylen)]
+    r = o.comparison_function(y)
+    return r
 
 
 class Seq(object):
@@ -57,7 +61,6 @@ class Match(object):
             
 def _match(pat, iterable):
     code = pat.compile()
-    print(pat._state)
     prog = ffi.new('Prog*', {'len': len(pat), 'start': code._inst})
     seq = Seq(iterable)
     match = Match(pat._state_i)

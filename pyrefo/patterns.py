@@ -278,3 +278,21 @@ class Repetition(Pattern):
         if self.mn == self.mx:
             return (base + "{1}").format(self.x, self.mn)
         return (base + "*({1},{2})").format(self.x, self.mn, self.mx)
+
+
+class Phrase(Predicate):
+    def __init__(self, x):
+        super().__init__(self.match)
+        self.x = x
+        self.arg = x
+
+    def match(self, y):
+        if not isinstance(y, (tuple, list)):
+            y = [y]
+        y = ''.join(y)
+        if self.x == y:
+            return 1
+        elif self.x.startswith(y):
+            return 2
+        else:
+            return 0

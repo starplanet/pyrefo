@@ -60,7 +60,7 @@ void SubMatch_delete(SubMatch *m);
 int findall(Prog *prog, Seq *seq, SubMatch **m, int nlen);
 int search(Prog*, Seq*, SubMatch*);
 
-extern "Python+C" int comp_func_callback(void *o, void *y);
+extern "Python+C" int comp_func_callback(void *o, void *y[], int ylen);
 ''')
 
 ffi.set_source('pyrefo._refo', '''

@@ -10,8 +10,12 @@
 #include <stdarg.h>
 #include <assert.h>
 
+#define DEBUG 0
 #define nil ((void*)0)
 #define nelem(x) (sizeof(x)/sizeof((x)[0]))
+
+#define debug_printf(fmt, ...) \
+            do { if (DEBUG) fprintf(stderr, fmt, ##__VA_ARGS__); } while (0)
 
 typedef struct Prog Prog;
 typedef struct Inst Inst;
@@ -53,16 +57,25 @@ enum	/* Inst.opcode */
 };
 
 enum {
-	MAXSUB = 20
+	MAXSUB = 20,
+	MAXCACHE = 10,
 };
 
 typedef struct Sub Sub;
+typedef struct Cache Cache;
 
 struct Sub
 {
 	int ref;
 	int nsub;
 	int sub[MAXSUB];
+};
+
+struct Cache
+{
+	int ref;
+	int nlen;
+	void *cache[MAXCACHE];
 };
 
 struct Pos
@@ -79,9 +92,13 @@ struct SubMatch
 
 Sub *newsub(int n);
 Sub *incref(Sub*);
-Sub *copy(Sub*);
 Sub *update(Sub*, int, int);
 void decref(Sub*);
+
+Cache *newcache(void);
+Cache *incref_cache(Cache*);
+Cache *update_cache(Cache*, int, void*);
+void decref_cache(Cache*);
 
 void mk_submatch(Sub *sub, SubMatch *m);
 void print_submatch(SubMatch *m);
@@ -92,6 +109,6 @@ Seq* Seq_new(int n);
 void Seq_delete(Seq *seq);
 SubMatch* SubMatch_new(int n);
 void SubMatch_delete(SubMatch *m);
-extern int comp_func_callback(void *o, void *y);
+extern int comp_func_callback(void *o, void *y[], int ylen);
 
 #endif

@@ -51,6 +51,13 @@ struct SubMatch
 	Pos *pos;
 };
 
+
+Seq* Seq_new(int n);
+void Seq_delete(Seq *seq);
+SubMatch* SubMatch_new(int n);
+void SubMatch_delete(SubMatch *m);
+
+int findall(Prog *prog, Seq *seq, SubMatch **m, int nlen);
 int search(Prog*, Seq*, SubMatch*);
 
 extern "Python+C" int comp_func_callback(void *o, void *y);

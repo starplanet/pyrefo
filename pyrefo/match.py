@@ -71,6 +71,18 @@ def search(pat, iterable):
     pat = Star(Any(), greedy=False) + Group(pat, None)
     return _match(pat, iterable)
 
+
 def match(pat, iterable):
     pat = Group(pat, None)
     return _match(pat, iterable)
+
+
+def findall(pat, iterable, nmax=20):
+    pat = Star(Any()) + Group(pat, None)
+    code = pat.compile()
+    prog = ffi.new('Prog*', {'len': len(pat), 'start': code._inst})
+    seq = Seq(iterable)
+    m = [Match(pat._state_i) for _ in range(nmax)]
+    ms = ffi.new('SubMatch*[]', [x._m for x in m])
+    c = lib.findall(prog, seq._seq, ms, nmax)
+    return m[:c]

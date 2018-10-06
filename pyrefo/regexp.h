@@ -83,7 +83,15 @@ Sub *copy(Sub*);
 Sub *update(Sub*, int, int);
 void decref(Sub*);
 
-int search(Prog*, Seq*, SubMatch*);
+void mk_submatch(Sub *sub, SubMatch *m);
+void print_submatch(SubMatch *m);
+int findall(Prog *prog, Seq *seq, SubMatch **m, int nlen);
+int search(Prog *prog, Seq *seq, SubMatch *m);
+
+Seq* Seq_new(int n);
+void Seq_delete(Seq *seq);
+SubMatch* SubMatch_new(int n);
+void SubMatch_delete(SubMatch *m);
 extern int comp_func_callback(void *o, void *y);
 
 #endif

@@ -5,7 +5,10 @@ python:
 install:
     - pip install -r requirements.txt
     - python pyrefo/pyrefo_build.py
+    - pip install codecov
 script:
     - pytest
 notifications:
     email: false
+after_success:
+    - codecov

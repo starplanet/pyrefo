@@ -204,6 +204,9 @@ int findall(Prog *prog, Seq *seq, SubMatch **m, int nlen)
 		decref(clist->t[i].sub);
 		decref_cache(clist->t[i].cache);
 	}
+	// free threadlist
+	free(clist);
+	free(nlist);
 	return c;
 }
 

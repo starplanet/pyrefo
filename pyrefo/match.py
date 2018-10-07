@@ -89,3 +89,9 @@ def findall(pat, iterable, nmax=20):
     ms = ffi.new('SubMatch*[]', [x._m for x in m])
     c = lib.findall(prog, seq._seq, ms, nmax)
     return m[:c]
+
+
+def finditer(pat, iterable, nmax=20):
+    m = findall(pat, iterable, nmax);
+    for item in m:
+        yield item

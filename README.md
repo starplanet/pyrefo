@@ -1,6 +1,6 @@
 ### pyrefo: a fast regex for object
 
-![python version](https://img.shields.io/badge/python-3.6-blue.svg)![pypy version](https://img.shields.io/badge/pypy-3.5-blue.svg)[![Build Status](https://travis-ci.com/yimian/pyrefo.svg?branch=master)](https://travis-ci.com/yimian/pyrefo)
+![python version](https://img.shields.io/badge/python-3.6-blue.svg) ![pypy version](https://img.shields.io/badge/pypy-3.5-blue.svg) [![Build Status](https://travis-ci.com/yimian/pyrefo.svg?branch=master)](https://travis-ci.com/yimian/pyrefo)
 
 This project is based on [refo](https://github.com/machinalis/refo) and the paper [Regular Expression Matching: the Virtual Machine Approach](https://swtch.com/~rsc/regexp/regexp2.html), it use cffi to extend python with c to speed accelerate processing performance.
 

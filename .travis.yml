@@ -8,3 +8,5 @@ install:
     - python pyrefo/pyrefo_build.py
 script:
     - pytest
+notifications:
+    email: false

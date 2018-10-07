@@ -1,4 +1,4 @@
-from pyrefo.match import *
+from pyrefo import search, Literal, findall, finditer, Phrase
 
 
 def test_search():

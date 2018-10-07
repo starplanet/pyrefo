@@ -193,3 +193,5 @@ Temporary Items
 .vscode
 _refo.c
 *.ipynb
+
+.idea

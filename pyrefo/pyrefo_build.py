@@ -65,7 +65,7 @@ extern "Python+C" int comp_func_callback(void *o, void *y[], int ylen);
 
 ffi.set_source('pyrefo._refo', '''
 #include   "regexp.h"
-''', sources=['pyrefo/pike.c', 'pyrefo/sub.c'])
+''', sources=['pyrefo/pike.c', 'pyrefo/sub.c'], include_dirs=['pyrefo'])
 
 if __name__ == '__main__':
     ffi.compile(verbose=True)

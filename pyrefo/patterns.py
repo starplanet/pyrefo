@@ -1,12 +1,14 @@
 from collections import OrderedDict
-from pyrefo.inst import *
+
+from pyrefo.inst import (Accept, Atom, Split, Save)
+
 
 class Pattern(object):
     def __init__(self):
         self._c = 0  # 指令计数
         self._n = 0  # group计数
         self._state = OrderedDict()  # 记录group key与submatch save inst关系
-        self._state_i = {} # 记录group key与submatch index关系
+        self._state_i = {}  # 记录group key与submatch index关系
         self.arg = None
 
     def _compile(self, cont):
@@ -17,15 +19,15 @@ class Pattern(object):
         self._c += 1
         self.number_save()
         return code
-    
+
     def number_save(self):
         i = 1
         for k, (s, e) in self._state.items():
-            s.set_n(2*i-1)
-            e.set_n(2*i)
+            s.set_n(2 * i - 1)
+            e.set_n(2 * i)
             self._state_i[k] = i
             i += 1
-            
+
     def __or__(self, other):
         return Disjunction(self, other)
 
@@ -57,8 +59,8 @@ class Pattern(object):
 
     def __len__(self):
         return self._c
-        
-    
+
+
 class Predicate(Pattern):
     def __init__(self, f):
         super().__init__()

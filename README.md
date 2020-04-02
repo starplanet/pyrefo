@@ -12,9 +12,51 @@ This project has done the following work:
 4. add new feature which supports partial match;
 5. add new `Phrase`pattern which can realize `'ab'`match `['a', 'b', 'c']`list;
 
+### How to use it
 
+`"ab" ` is `Literal("a")+Literal("b")`
 
-### performance test
+`"a*"` is `Star(Literal("a"))`
+
+`"aab?"` is `Literal("a")+Literal("a")+Question(Literal("b"), greedy=False)`
+
+`a{3,4}` is `Repetition(Literal("a"), 3, 4, greedy=False)`
+
+`"(ab)+|(bb*)?"` is 
+
+```python
+a = Literal("a")
+b = Literal("b")
+regex = Plus(a + b) | Star(b + b, greedy=False)
+```
+
+You can also assign a group to any sub-match and later on retrieve the matched content, for instance:
+
+```python
+regex = Group(Plus(a + b), "foobar") | Star(b + b, greedy=False)
+m = match(regex, "abab")
+print(m.span("foobar"))
+```
+
+`pyrefo` offers `match`, `search`, `findall`, `finditer` search functions:
+
+- match: match pattern from first position
+- search: search pattern from first position till find one
+- findall: find all matched result
+- finditer: return an iterator for all matched result
+
+`pyrefo` offers the following predicates:
+
+- Any
+- Literal
+- Star
+- Plus
+- Question
+- Group
+- Repetition
+- Phrase
+
+### Performance test
 
 #### prerequisites
 

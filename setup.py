@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='pyrefo',
-    version='0.1',
+    version='0.2',
     description='a fast regex for object',
     long_description=readme(),
     classifiers=[

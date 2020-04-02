@@ -83,7 +83,7 @@ def match(pat, iterable):
 
 
 def findall(pat, iterable, nmax=20):
-    pat = Star(Any()) + Group(pat, None)
+    pat = Star(Any(), greedy=False) + Group(pat, None)
     code = pat.compile()
     prog = ffi.new('Prog*', {'len': len(pat), 'start': code._inst})
     seq = Seq(iterable)
@@ -94,6 +94,6 @@ def findall(pat, iterable, nmax=20):
 
 
 def finditer(pat, iterable, nmax=20):
-    m = findall(pat, iterable, nmax);
+    m = findall(pat, iterable, nmax)
     for item in m:
         yield item

@@ -21,6 +21,9 @@ def test_pharse_search():
     m = search(Phrase('ab'), ['a', 'b', 'c'])
     assert m.group() == (0, 2)
 
+    m = findall(Phrase('ab'), ['a', 'b', 'c'])
+    assert len(m) == 1
+
 
 def test_finditer():
     items = []

@@ -60,6 +60,9 @@ class Match(object):
         for key in self.state:
             yield key
 
+    def __repr__(self):
+        return 'Match(%d, %d)' % (self.start(), self.end())
+
 
 def _match(pat, iterable):
     code = pat.compile()
